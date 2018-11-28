@@ -1,5 +1,5 @@
 """
-This program implements a 'Mau-Mau' game.
+This program implements a 'Connect Four' game.
 """
 
 import os
