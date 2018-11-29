@@ -29,34 +29,52 @@ def print_grid(to_print_grid):
         print(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9])
 
 
-def won_test(idn, grid_tt):
+def won_test(idn, grid_tt, player_list):
     """
     Tests if player has won who marks his fields with "idn" (1/2).
     Returns true or false.
     """
 
-    idn = idn[1]
+    idn = player_list.index(idn)+1
     flag = False
-    # vert
-    for rowx in range(len(grid_tt[0])-1):
-        for coly in range(len(grid_tt)-2):
-            vert_sum = 0
-            for rind in range(2):
-                for dind in range(3):
-                    if grid_tt[dind + coly][rind + rowx] == idn:
-                        vert_sum += 1
-            if vert_sum == 4:
-                flag = True
-    # hori
-    for rowx in range(len(grid_tt[0])-2):
-        for coly in range(len(grid_tt)-1):
-            hori_sum = 0
+    # check for vertical win
+    vertical_field = [[0, 0], [0, 0], [0, 0]]
+    for rowx in range(len(grid_tt)-2):
+        for coly in range(len(grid_tt[0])-1):
             for rind in range(3):
                 for dind in range(2):
-                    if grid_tt[dind + coly][rind + rowx] == idn:
-                        hori_sum += 1
-            if hori_sum == 4:
+                    vertical_field[rind][dind] = grid_tt[rowx+rind][coly+dind]
+            field_sum = [0, 0, 0]
+            for t in range(3):
+                field_sum[t] = sum([1 for i in vertical_field[t] if i == idn])
+            if field_sum[0] > 0 and field_sum[1] == 2 and field_sum[2] > 0:
                 flag = True
+                # print(vertical_field)
+
+    # check for horizontal win
+    horizontal_field = [[0, 0, 0], [0, 0, 0]]
+    for rowx in range(len(grid_tt)-1):
+        for coly in range(len(grid_tt[0])-2):
+            for rind in range(2):
+                for dind in range(3):
+                    # horizontal_field[dind][rind] = grid_tt[rowx+dind][coly+rind]
+                    horizontal_field[rind][dind] = grid_tt[rowx+rind][coly+dind]
+            field_sum = [0, 0]
+            for t in range(2):
+                field_sum[t] = sum([1 for i in horizontal_field[t] if i == idn])
+            if field_sum[0] > 1 and field_sum[1] > 1 and\
+            horizontal_field[0][2] == horizontal_field[1][0]:
+                flag = True
+                # print(horizontal_field)
+            # for t in horizontal_field:
+                # print(t[0], t[1], t[2])
+            # print("----")
+    # for t in win_pattern_horizontal_1:
+        # print(t[0], t[1], t[2])
+    # print("----")
+    # for t in win_pattern_horizontal_2:
+        # print(t[0], t[1], t[2])
+    # print("----")
     return flag
 
 
@@ -125,9 +143,10 @@ def player_turn(player, turn_grid, playerlist):
     return turn_grid
 
 
-def terminate_game():
+def terminate_game(end_grid):
     """Function that terminates the game."""
 
+    print_grid(end_grid)
     print("spiel fertig bitches")
 
 
@@ -145,11 +164,12 @@ def main():
 
                 grid = player_turn(p, grid, players)
 
-                done = won_test(p, grid)
+                done = won_test(p, grid, players)
 
-    terminate_game()
+    terminate_game(grid)
 
 
 if __name__ == "__main__":
 
     main()
+
