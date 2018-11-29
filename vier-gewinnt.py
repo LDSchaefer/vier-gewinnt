@@ -4,8 +4,9 @@ This program implements a 'Connect Four' game.
 
 import os
 
-__author__ = "6964771: Philip Reich"
-__email__ = "philip.reich@stud.uni-frankfurt.de"
+__author__ = "6964771: Philip Reich, 6855495: Lucas Schäfer"
+__credits__ = ""
+__email__ = "philip.reich@stud.uni-frankfurt.de, s3527330@rz.uni-frankfurt.de"
 
 #
 # if main:
