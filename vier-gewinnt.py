@@ -94,10 +94,10 @@ def start_spiel():
 
     players_start = []
     for i in range(2):
-        temp = input("Spielername >>")
-        temp1 = input("KI? (0 für KI)>>")
+        temp = input(f"Name von Spieler {i+1} >>")
+        temp1 = input("KI? (0 für KI, 1 für Mensch)>>")
         while temp1 not in ["0", "1"]:
-            temp1 = input("KI? (0 für KI)>>")
+            temp1 = input("KI? (0 für KI, 1 für Mensch)>>")
         players_start.append((temp, temp1))
     grid_start = [[0 for b in range(10)] for i in range(9)]
     return players_start, grid_start
@@ -105,7 +105,6 @@ def start_spiel():
 
 def ai_turn(player_int, aiturn_grid):
     """Executes AI turn."""
-
     pass
 
 
@@ -128,16 +127,23 @@ def player_turn(player, turn_grid, playerlist):
     clear_console()
     zero_or_one = playerlist.index(player)
     print_grid(turn_grid)
-    print(f"{player[0]}, your turn:")
+    print(f"{player[0]} ist am Zug.")
     if player[1] == 0:
         ai_turn(zero_or_one, turn_grid)
     else:
-        col = input("In welche Spalte soll eingeworfen werden? (1-10)")
         valid_cols = [i for i in range(1, 11) if turn_grid[0][i-1] == 0]
+        print("Es kann in folgende Spalten eingeworfen werden:", valid_cols)
+        print("'exit' zum beenden, 'new' für eine neue runde")
+        col = input("In welche Spalte soll eingeworfen werden? (1-10) >> ")
         valid_cols = [str(i) for i in valid_cols]
-        while col not in valid_cols:
+        while (col not in valid_cols) and (col != "exit") and (col != "new"):
             print("Keine gültige Eingabe oder Spalte voll.")
-            col = input("In welche Spalte soll eingeworfen werden? (1-10)")
+            print("'exit' zum beenden, 'new' für eine neue runde")
+            col = input("In welche Spalte soll eingeworfen werden? (1-10) >> ")
+        if col == "exit":
+            exit()
+        if col == "new":
+            main()
         col = int(col)
         turn_grid = grid_move(zero_or_one+1, turn_grid, col-1)
 
@@ -153,7 +159,8 @@ def terminate_game(end_grid):
 
 def main():
     """Is here to start the module from the console or shell."""
-
+    
+    clear_console()
     players, grid = start_spiel()
     done = False
 
