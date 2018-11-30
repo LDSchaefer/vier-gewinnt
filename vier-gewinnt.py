@@ -31,6 +31,7 @@ def print_grid(to_print_grid):
 
 def won_test(idn, grid_tt, player_list):
     """
+    Takes the active player tupel, the grid, and the player tupel list.
     Tests if player has won who marks his fields with "idn" (1/2).
     Returns true or false.
     """
@@ -47,7 +48,8 @@ def won_test(idn, grid_tt, player_list):
             field_sum = [0, 0, 0]
             for t in range(3):
                 field_sum[t] = sum([1 for i in vertical_field[t] if i == idn])
-            if field_sum[0] > 0 and field_sum[1] == 2 and field_sum[2] > 0:
+            if field_sum[0] > 0 and field_sum[1] == 2 and field_sum[2] > 0 and\
+            vertical_field[0] != vertical_field[2]:
                 flag = True
                 # print(vertical_field)
 
@@ -63,7 +65,7 @@ def won_test(idn, grid_tt, player_list):
             for t in range(2):
                 field_sum[t] = sum([1 for i in horizontal_field[t] if i == idn])
             if field_sum[0] > 1 and field_sum[1] > 1 and\
-            horizontal_field[0][2] == horizontal_field[1][0]:
+            horizontal_field[0] != horizontal_field[1]:
                 flag = True
                 # print(horizontal_field)
             # for t in horizontal_field:
@@ -110,7 +112,6 @@ def ai_turn(player_int, aiturn_grid):
 def grid_move(player_symbol, mutate_grid, mutate_col):
     """Inserts value in grid for player."""
 
-    print(mutate_col)
     for row in range(9):
         if mutate_grid[row][mutate_col] != 0:
             mutate_grid[row-1][mutate_col] = player_symbol
