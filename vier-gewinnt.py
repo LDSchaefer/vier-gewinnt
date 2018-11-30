@@ -51,7 +51,6 @@ def won_test(idn, grid_tt, player_list):
             if field_sum[0] > 0 and field_sum[1] == 2 and field_sum[2] > 0 and\
             vertical_field[0] != vertical_field[2]:
                 flag = True
-                # print(vertical_field)
 
     # check for horizontal win
     horizontal_field = [[0, 0, 0], [0, 0, 0]]
@@ -67,16 +66,6 @@ def won_test(idn, grid_tt, player_list):
             if field_sum[0] > 1 and field_sum[1] > 1 and\
             horizontal_field[0] != horizontal_field[1]:
                 flag = True
-                # print(horizontal_field)
-            # for t in horizontal_field:
-                # print(t[0], t[1], t[2])
-            # print("----")
-    # for t in win_pattern_horizontal_1:
-        # print(t[0], t[1], t[2])
-    # print("----")
-    # for t in win_pattern_horizontal_2:
-        # print(t[0], t[1], t[2])
-    # print("----")
     return flag
 
 
