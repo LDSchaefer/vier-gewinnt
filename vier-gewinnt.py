@@ -58,7 +58,6 @@ def won_test(idn, grid_tt, player_list):
         for coly in range(len(grid_tt[0])-2):
             for rind in range(2):
                 for dind in range(3):
-                    # horizontal_field[dind][rind] = grid_tt[rowx+dind][coly+rind]
                     horizontal_field[rind][dind] = grid_tt[rowx+rind][coly+dind]
             field_sum = [0, 0]
             for t in range(2):
