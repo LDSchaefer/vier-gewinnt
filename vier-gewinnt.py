@@ -54,7 +54,6 @@ def won_test(idn, grid_tt, player_list):
             if field_sum[0] > 0 and field_sum[1] == 2 and field_sum[2] > 0 and\
             vertical_field[0] != vertical_field[2]:
                 flag = True
-                print(vertical_field)
 
     # check for horizontal win
     horizontal_field = [[0, 0, 0], [0, 0, 0]]
