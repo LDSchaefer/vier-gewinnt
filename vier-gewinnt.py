@@ -48,9 +48,13 @@ def won_test(idn, grid_tt, player_list):
             field_sum = [0, 0, 0]
             for t in range(3):
                 field_sum[t] = sum([1 for i in vertical_field[t] if i == idn])
+            for row in range(3):
+                vertical_field[row] = [i if (i == idn) else 0 for i in\
+                vertical_field[row]]
             if field_sum[0] > 0 and field_sum[1] == 2 and field_sum[2] > 0 and\
             vertical_field[0] != vertical_field[2]:
                 flag = True
+                print(vertical_field)
 
     # check for horizontal win
     horizontal_field = [[0, 0, 0], [0, 0, 0]]
@@ -62,6 +66,9 @@ def won_test(idn, grid_tt, player_list):
             field_sum = [0, 0]
             for t in range(2):
                 field_sum[t] = sum([1 for i in horizontal_field[t] if i == idn])
+            for col in range(2):
+                horizontal_field[col] = [i if (i == idn) else 0 for i in\
+                 horizontal_field[col]]
             if field_sum[0] > 1 and field_sum[1] > 1 and\
             horizontal_field[0] != horizontal_field[1]:
                 flag = True
@@ -142,12 +149,13 @@ def terminate_game(end_grid):
     """Function that terminates the game."""
 
     print_grid(end_grid)
-    print("spiel fertig bitches")
+    print("Game over. Enter zum beenden.")
+    input()
 
 
 def main():
     """Is here to start the module from the console or shell."""
-    
+
     clear_console()
     players, grid = start_spiel()
     done = False
@@ -168,4 +176,3 @@ def main():
 if __name__ == "__main__":
 
     main()
-
