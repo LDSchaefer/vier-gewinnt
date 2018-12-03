@@ -99,6 +99,15 @@ def start_spiel():
 
 def ai_turn(player_int, aiturn_grid):
     """Executes AI turn."""
+    # if kein AI Symbol in Array
+    #     randint()
+    # else:
+    #     if 1 AI symb:
+    #         add either 1 horizontal 1 vertical
+    #     elif 2 AI symb and next to each other or above :
+    #         add 1 diagonal
+    #     elif 3 AI symb and 2 next and 1 diagonal:
+    #         add 1 next to diagonal
     pass
 
 
